@@ -5141,6 +5141,10 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position'])
         if (appendToBody) {
           angular.element($window).bind('resize', fireRecalculating);
           $document.find('body').bind('scroll', fireRecalculating);
+	  originalScope.$on('$destroy', function unbind() {
+            angular.element($window).unbind('resize', fireRecalculating);
+            $document.find('body').unbind('scroll', fireRecalculating);
+          });
         }
 
         // Declare the timeout promise var outside the function scope so that stacked calls can be cancelled later
